@@ -1,0 +1,151 @@
+<!DOCTYPE>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" />
+	<title>狼人护卫队</title>
+	<link href="css/reset.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+	<script src="js/jquery-2.1.0.js"></script>
+</head>
+<body>
+
+	<img src="img/enemy.png" id="enemy_img" style="display:none;" />
+	<img src="img/tower.png" id="tower_img" style="display:none;" />
+	<img src="img/bullet.png" id="bullet_img" style="display:none;" />
+	<img src="img/btn.png" id="btn_img" style="display:none;" />
+	<div class="main-box">
+		<div class="menu" hidden>
+			<div class="button-box"  >
+				<div class="button" id="start">
+					<span>开始游戏</span>
+				</div>
+				<div class="button" id="scores">
+					<span>排行榜</span>
+				</div>
+				<div class="button" id="help">
+					<span>游戏帮助</span>
+				</div>
+			</div>
+			<div class="help" hidden >
+				<div class="help-left">
+					<div class="introduction">
+						<h2>游戏简介</h2>
+						<p>说明：每种塔都可以升级到3级，升级的价格与本身建造相同，卖掉的话就是总额的一半。
+							说明：每种塔都可以升级到3级，升级的价格与本身建造相同，卖掉的话就是总额的一半。
+							说明：每种塔都可以升级到3级，升级的价格与本身建造相同，卖掉的话就是总额的一半。
+							说明：每种塔都可以升级到3级，升级的价格与本身建造相同，卖掉的话就是总额的一半。
+							说明：每种塔都可以升级到3级，升级的价格与本身建造相同，卖掉的话就是总额的一半。
+							说明：每种塔都可以升级到3级，升级的价格与本身建造相同，卖掉的话就是总额的一半。
+							说明：每种塔都可以升级到3级，升级的价格与本身建造相同，卖掉的话就是总额的一半。</p>
+					</div>
+					<div class="enemy">
+						<h2>敌方单位</h2>
+						<p>游戏中有5种游戏怪物，他们随着波数出现和消失，不同的怪物拥有不同的移动速度和血量。
+						</p>
+						<img src="img/白痴.png" width="70" height="70" style="font-size:0">
+					</div>
+				</div>
+				<div class="help-right">
+					<div class="person">
+						<h2>游戏角色</h2>
+						<p>
+							说明：每种塔都可以升级到3级，升级的价格与本身建造相同，卖掉的话就是总额的一半。<br/><br/>
+							第一种塔：升级到3级，有小偷功能，每攻击一次会偷取1块钱。<br/>
+							第二种塔：减速攻击，3级时可以同时减速两个。<br/>
+							第三种塔：多重攻击。攻击多个目标。<br/>
+							第四种塔：穿刺攻击，攻击一条线上，攻击力最高。<br/>
+							第五种塔：秒杀攻击，有一定几率把敌人秒杀。<br/><br />
+						</p>
+						<img src="img/daozei.png" width="70" height="70" style="font-size:0">
+						<img src="img/daozei.png" width="70" height="70" style="font-size:0">
+						<img src="img/daozei.png" width="70" height="70" style="font-size:0">
+						<img src="img/daozei.png" width="70" height="70" style="font-size:0">
+						<img src="img/daozei.png" width="70" height="70" style="font-size:0">
+						<div class="button" id="help-back">
+							<span>返回菜单</span>
+						</div>
+					</div>
+				</div>
+				</div>
+		</div>
+		<div class="maps" hidden>
+			<h1>选择地图</h1>
+			<ul id="select_map">
+				<li name="1">
+					<h2>岩石村庄</h2>
+					<img src="img/map_bg1.png" height="160" width="340" class="map_img1">
+					<img src="img/map_bgshodow1.png" height="165" width="355" class="map_img2">				</li>
+				<li name="2"  class="choose">
+					<h2>岩石村庄</h2>
+					<img src="img/map_bg1.png" height="160" width="340" class="map_img1">
+					<img src="img/map_bgshodow1.png" height="165" width="355" class="map_img2">
+				</li>
+				<li name="3">
+					<h2>岩石村庄</h2>
+					<img src="img/map_bg1.png" height="160" width="340" class="map_img1">
+					<img src="img/map_bgshodow1.png" height="165" width="355" class="map_img2">				</li>
+				<li name="4">
+					<h2>岩石村庄</h2>
+					<img src="img/map_bg1.png" height="160" width="340" class="map_img1">
+					<img src="img/map_bgshodow1.png" height="165" width="355" class="map_img2">				</li>
+			</ul>
+			<div class="maps_buttons">
+				<div id="start_game" class="button" onclick="startGame()"><span>开始游戏</span></div>
+				<div id="maps-back" class="button"><span>返回菜单</span></div>
+			</div>
+			<!--<select id="select_map2"><option value="1">地图一</option><option value="2">地图二</option></select>,然后按<input type="button" value="开始" onclick="startGame()" />开始游戏！-->
+		</div>
+		<div id="game" hidden>
+			<canvas id="info" width="1000" height="45" ></canvas>
+			<canvas id="map" width="1000" height="500" ></canvas>
+			<canvas id="main" width="1000" height="500"></canvas>
+			<canvas id="tower" width="1000" height="500" ></canvas>
+			<canvas id="select" width="1000" height="500" ></canvas>
+			<canvas id="list" width="1000" height="80" style="display: none"></canvas>
+		</div>
+        <div id="fail" >
+            <h1>游戏失败</h1>
+            <div class="player-score">
+                <h3>你的得分</h3>
+                <span id="last_score">1000</span>
+				<span id="upload_text">告诉我们你的名字，<br>并上传分数！</span>
+				<div id="upload_score">
+					<input type="text" value="" id="player_name" placeholder="您的名字！">
+					<input id="upload_button" type="button" value="提交">
+				</div>
+            </div>
+			<div class="button">
+                    <span>返回菜单</span>
+			</div>
+			<div id="upload_result" hidden>
+			</div>
+        </div>
+	</div>
+
+</body>
+<script type="text/javascript" src="js/Main.js"></script>
+<script type="text/javascript" src="js/tools.js"></script>
+<script type="text/javascript" src="js/MapData.js"></script>
+<script type="text/javascript" src="js/Map.js"></script>
+<script type="text/javascript" src="js/Info.js"></script>
+<script type="text/javascript" src="js/Enemy.js"></script>
+<script type="text/javascript" src="js/Tower.js"></script>
+<script type="text/javascript" src="js/Bullet.js"></script>
+<script type="text/javascript" src="js/Game.js"></script>
+<script type="text/javascript" src="js/Rank.js"></script>
+
+<script type="text/javascript">
+
+	var isStart = false;
+
+	function startGame(){
+
+		if(!isStart)Game.start();
+		else Game.restart();
+
+		isStart = true;
+	}
+
+</script>
+</html>
