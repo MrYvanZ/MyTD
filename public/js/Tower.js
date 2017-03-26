@@ -18,9 +18,9 @@ Tower.prototype = {
 	//塔的图片位置
 	towerMap : [{x:0,y:0},{x:50,y:0},{x:100,y:0},{x:150,y:0},{x:200,y:0}],
     //画塔
-	draw : function(){
-		
-		Canvas.drawImg(this.cxt,this.img,this.towerMap[this.type].x,this.towerMap[this.type].y,this.width,this.height,this.x,this.y,this.width,this.height);
+	draw : function(num){
+		Canvas.clearRect(this.cxt,this.x,this.y,this.width,this.height);
+		Canvas.drawImg(this.cxt,this.img,this.towerMap[this.type].x,this.towerMap[this.type].y+num,this.width,this.height,this.x,this.y,this.width,this.height);
 	},
     //更新塔的信息
 	update : function(enemyList){

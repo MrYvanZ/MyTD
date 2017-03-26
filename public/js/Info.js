@@ -10,14 +10,14 @@ var Info = {
 	towerPosition : [],
     //已经安装的塔的位置信息
 	installTower : {},
-	init : function(cxt,img){
-		
-		this.redraw();
+	init : function(cxt,img,bg){
+		this.towerImg = img;
+		this.background = bg;
         //画塔
 		for(var i = 0;i<5;i++){
-			Canvas.drawImg(cxt,img,i*50,0,50,50,500+i*70,0,50,50);
+			Canvas.drawImg(cxt,img,i*50,0,50,50,50+i*150,550,50,50);
 			
-			this.towerPosition.push({x:500+i*70,y:25,width:50,height:50});
+			this.towerPosition.push({x:50+i*150,y:550,width:50,height:50});
 		}
 		//画塔下的描述信息
 		//Canvas.drawText(cxt,"50(↑50)",160,25,'orange');
@@ -25,14 +25,14 @@ var Info = {
 		//Canvas.drawText(cxt,"100(↑100)",300,25,'orange');
 		//Canvas.drawText(cxt,"125(↑125)",370,25,'orange');
 		//Canvas.drawText(cxt,"150(↑150)",440,25,'orange');
-		this.towerImg = img;
+		this.redraw();
 		this.bindEvent();
 	},
     //绑定右侧塔的事件
 	bindEvent : function(){
 		
-		var self = this,info = document.getElementById("info"),
-			select = document.getElementById("select"),
+		var self = this,info = $("#info")[0],
+			select = $("#select")[0],
 			main = Game.canvasList.tower,
 			cxt = Game.canvasList.select;
 		//鼠标按下
@@ -45,7 +45,7 @@ var Info = {
 			for(var i=0;i<self.towerPosition.length;i++){
                 //点击的是塔
 				if(T.pointInRect({x:x,y:y},self.towerPosition[i])){
-                    //金钱不够,推出
+                    //金钱不够,退出
 					if(self.money - TowerType[i]["level_1"].buyIt < 0)break;
 					//绑定移动移动事件,也可以说是拖动
 					select.onmousemove = function(e){
@@ -72,9 +72,9 @@ var Info = {
 						//此位置可以放塔
 						if(MapData[xIndex][yIndex] == 0 && !self.installTower[xIndex+"_"+yIndex]){
                             //新增一个塔
-							var img = document.getElementById("tower_img");
+							var img = $("#tower_img")[0];
 							var tower = new Tower(main,img,i,xIndex*50,yIndex*50,50,50);
-							tower.draw();
+							tower.draw(0);
 							//标记当前位置有塔
 							self.installTower[xIndex+"_"+yIndex] = i+"";
 							//加入塔的列表中
@@ -134,12 +134,13 @@ var Info = {
 	},
     //重画
 	redraw : function(){
-	
-		Canvas.clear(Game.canvasList.info,400,45);
-		Canvas.drawText(Game.canvasList.info,"金钱:"+this.money,20,30,"red");
-		Canvas.drawText(Game.canvasList.info,"第"+this.mission+"波",120,30,"red");
-		Canvas.drawText(Game.canvasList.info,"剩余:"+this.life,200,30,"red");
-		Canvas.drawText(Game.canvasList.info,"得分:"+this.score,300,30,"red");
+		console.log(123);
+		Canvas.clear(Game.canvasList.info,400,60);
+		Canvas.drawImg(Game.canvasList.info,this.background,0,0,340,40,0,3,340,40);
+		Canvas.drawText(Game.canvasList.info,this.money,80,30,"black");
+		//Canvas.drawText(Game.canvasList.info,"第"+this.mission+"波",120,30,"black");
+		Canvas.drawText(Game.canvasList.info,this.life,270,30,"black");
+		Canvas.drawText(Game.canvasList.info,this.score,180,30,"black");
 	},
     //画出塔的攻击范围以及升级等信息
 	drawScope : function(tower){
@@ -166,7 +167,7 @@ var Info = {
 			tower.level += 1;
 			
 			this.updateMoney(TowerType[tower.type]["level_"+tower.level].buyIt * -1);
-			
+			tower.draw((tower.level-1)*50);
 			this.drawScope(tower);
 			//update
 		}

@@ -44,8 +44,15 @@ Enemy.prototype = {
 		else Canvas.drawImg(this.cxt,this.img,this.enemyMap[this.type].x,this.enemyMap[this.type].y,this.width,this.height,this.x,this.y,this.width,this.height);
 		//计算血量百分比
 		var persen = Math.floor(this.life / this.maxLife * 100) / 2;
+		//console.log(persen);
 		//画出血量
-		Canvas.fillRect(this.cxt,this.x-5,this.y-5,persen,3,"rgba(38,223,116,0.8)");
+		if(persen > 25)
+			//血量50%以上时为绿色
+			Canvas.fillRect(this.cxt,this.x-5,this.y-5,persen,3,"rgba(38,223,116,0.8)");
+		else
+			//血量50%以下时为红色
+			Canvas.fillRect(this.cxt,this.x-5,this.y-5,persen,3,"rgba(255,0,0,0.8)");
+
 	},
     //敌人结束
 	over : function(flag){

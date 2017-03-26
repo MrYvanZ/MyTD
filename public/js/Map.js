@@ -8,9 +8,21 @@ var Map = {
 			
 			for(j = 0;j<20;j++){
 				//画背景地图
-				if(MapData[i][j] == 0)Canvas.drawRect(map,i*50,j*50,50,50,'red');
+				if(MapData[i][j] == 0){
+				//	Canvas.drawRect(map,i*50,j*50,50,50,'red');
+					var img = $("#map-gezi1")[0];
+						if((j%2 == 0 && i%2 !=0)||(j%2!=0&&i%2==0))
+							map.drawImage(img,0,0,60,60,i*50,j*50,50,50);
+						else
+							map.drawImage(img,60,0,60,60,i*50,j*50,50,50);
+
+				}
                 //画可以走的路
-				else Canvas.fillRect(map,i*50,j*50,50,50,'black');
+				else{
+					var img2 = $("#map-gezi2")[0];
+					map.drawImage(img2,0,0,60,60,i*50,j*50,50,50);
+					//Canvas.fillRect(map,i*50,j*50,50,50,'black');
+				}
 			}
 		}
 	}

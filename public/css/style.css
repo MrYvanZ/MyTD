@@ -11,12 +11,11 @@ body {
     font-size: 12px;
     font-weight:bold;
     overflow: hidden;
-    background: url(../img/bg.jpg) ;
-    background-size: 100%;
+    background: url(../img/bg.jpg);
 }
 .main-box{
     position:relative;
-    max-width: 1024px;
+    max-width: 1000px;
     width: 100%;
     height: 600px;
     margin: 1% auto;
@@ -50,6 +49,7 @@ body {
 
 }
 .button-box{
+    position: relative;
     width: 230px;
     height: 250px;
     padding: 260px 0 0 405px;
@@ -67,6 +67,110 @@ body {
     font-size: 25px;
     line-height: 40px;
 }
+#return{
+    position: absolute;
+    left: 670px;
+    top: 265px;
+    width: 180px;
+    height: 35px;
+    padding: 8px;
+}
+#return span{
+    font-size: 20px;
+    line-height: 35px;
+    height: 30px;
+}
+#rank{
+    width:100%;
+    height: 100%;
+    padding: 20px;
+
+}
+#map_list{
+    float: left;
+    position: relative;
+    width: 280px    ;
+    height: 570px;
+    background: url("../img/big_wood.png") no-repeat;
+    background-size: 300px 560px;
+}
+#map_list li{
+    position: relative;
+    width: 300px;
+    height: 140px;
+}
+#map_list li span{
+    display: block;
+    text-align: center;
+    font-size: 24px;
+    line-height: 30px;
+}
+#map_list li .map_img1{
+    top:10px;
+    left: 25px;
+}
+#map_list li .map_img2{
+    top:10px;
+    left: 20px;
+}
+#rank_list{
+    float: left;
+    width: 670px;
+    height: 500px;
+    margin-left: 30px;
+    background: url("../img/big_wood.png") no-repeat;
+    background-size: 100%;
+}
+#rank_list h2{
+    width: 280px;
+    height:60px;
+    padding: 10px;
+    margin: 10px auto;
+    text-align: center;
+    font-size: 40px;
+    line-height: 45px;
+    background: url("../img/big_button1.png") no-repeat;
+    background-size:300px 60px ;
+}
+#rank_table{
+    width: 90%;
+    padding: 20px;
+    margin: 0 auto;
+    background: url("../img/lanse.jpg") no-repeat;
+    background-size: 100% 360px;
+    border-radius: 20px;
+}
+#rank_table tr{
+    text-align: center;
+    padding: 10px;
+    margin: 20px;
+}
+#rank_table th{
+    width: 33%;
+    font-size: 24px;
+    line-height: 40px;
+    border-bottom: 5px dashed black;
+ }
+#rank_table td{
+    width: 33%;
+    font-size: 20px;
+    line-height: 40px;
+}
+#rank_table tr:last-child td {
+    border-bottom: none;
+}
+#rank_back{
+    position: absolute;
+    width: 200px;
+    height: 40px;
+    padding: 10px 0 0 10px;
+    margin: 15px auto;
+    font-size: 25px;
+    line-height: 35px;
+    right: 30px;
+    bottom: 10px;
+}
+
 .help{
     width: 95%;
     height: auto;
@@ -122,10 +226,10 @@ body {
     
 }
 .maps{
+    background:url("../img/maplist-bg1.jpg") no-repeat;
+    background-size: 1000px 600px;
     width: 100%;
     height: 100%;
-    background: white;
-    background-size:100% ;
 }
 .maps h1{
     font-size: 30px;
@@ -291,36 +395,35 @@ input:-ms-input-placeholder{
     text-align: center;
 }
 
-#map{
-    background:url(../img/bg.png) repeat;
-    position:absolute;
-    left:0;
-    top:0;
-    z-index:99;
-}
 #game{
     position: relative;
     width:100%;
-    height:500px;
-    margin: 45px auto;
+    height:100%;
+    background:url("../img/maplist-bg1.jpg") no-repeat;
+    background-size: 1000px 600px;
 }
-
-
 #main{
     position:absolute;
-    left:0;top:0;
+    left:0;
+    top:45px;
     z-index:100;
+}
+#map{
+    position:absolute;
+    left:0;
+    top: 45px;
+    z-index:99;
 }
 #tower{
     position:absolute;
     left:0;
-    top:0;
+    top:45px;
     z-index:100;
 }
 #select{
     position:absolute;
     left:0;
-    top:0;
+    top: 45px;
     z-index:101;
 }
 #list{
@@ -332,8 +435,30 @@ input:-ms-input-placeholder{
 }
 #info{
     position: absolute;
+    margin:0 auto;
     left: 0;
-    top: -45px;
-    z-index: 102;
-    background: url("../img/background2.jpg");
+    top: 0px;
+    z-index: 98;
+    background: url("../img/big-wood2.png");
+}
+#game_buttons{
+    position: absolute;
+    z-index: 200;
+    width: 350px;
+    height: 40px;
+    top: 5px;
+    right: 5px;
+    padding: 0;
+}
+#game_buttons .button{
+    float: left;
+    width: 130px;
+    height: 30px;
+    margin: 0 10px;
+    padding: 3px 10px;
+}
+#game_buttons .button span{
+    font-size: 20px;
+    line-height: 30px;
+    height: 30px;
 }

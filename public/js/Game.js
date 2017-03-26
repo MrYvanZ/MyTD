@@ -29,9 +29,12 @@ var Game = {
     //初始化
 	init : function(){
 		this.initImg();
-		this.initCanvas();
-		this.initData();
-		this.initBind();
+		var inited =  this.initImg();
+		if(inited){
+			this.initCanvas();
+			this.initData();
+			this.initBind();
+		}
 	},
     //初始化图片
 	initImg : function(){
@@ -39,8 +42,10 @@ var Game = {
 			enemy_img : $("#enemy_img")[0],
 			tower_img : $("#tower_img")[0],
 			bullet_img : $("#bullet_img")[0],
-			btn_img : $("#btn_img")[0]
+			btn_img : $("#btn_img")[0],
+			info_bg:$("#info_bg")[0]
 		}
+		return true;
 	},
     //初始化画布
 	initCanvas : function(){
@@ -56,7 +61,7 @@ var Game = {
     //初始化数据
 	initData : function(){
 
-		Info.init(this.canvasList.info,this.imgList.tower_img);
+		Info.init(this.canvasList.info,this.imgList.tower_img,this.imgList.info_bg);
 	},
     //初始化绑定塔的事件
 	initBind : function(){
@@ -148,11 +153,9 @@ var Game = {
         switch(name){
             case "1":
                 MapData = MapOne;
-				alert("1");
                 break;
             case "2":
                 MapData = MapTwo;
-				alert("2")
                 break;
 			case "3":
 				MapDtaa =  MapOne;
@@ -165,8 +168,9 @@ var Game = {
                 break;
         }
         Map.draw(this.canvasList.map);
-		//$(".maps").hide();
-		//$("#game").show();
+		$(".maps").hide();
+		$("#game").show();
+		Info.redraw();
 		this.timer = setInterval(Game.loop,20);
 	},
     //重新开始
@@ -202,11 +206,16 @@ var Game = {
 	stop : function(){
 		clearInterval(this.timer);
 	},
+	//继续
+	resume: function () {
+		this.timer = setInterval(Game.loop,20);
 
+	},
     //结束
 	over : function(){
 		this.stop();
 		$("#game").hide();
+		$("#last_score").text(Info.score);
 		$("#fail").show();
 	},
     //赢了
@@ -230,5 +239,3 @@ var Game = {
 		updateBullet();
 	}
 }
-
-Game.init();
