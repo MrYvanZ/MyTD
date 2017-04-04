@@ -79,7 +79,6 @@ Enemy.prototype = {
 		this.life -= hurt;
 		//选择子弹效果
 		switch(effer.effer){
-			
 			case "frozen":
 				this.frozenTime = effer.num;
 				break;
@@ -110,29 +109,31 @@ Enemy.prototype = {
 			((this.x >= this.nextPosition.x - 5 && this.x <= this.nextPosition.x) && (this.y >= this.nextPosition.y - 5 && this.y <= this.nextPosition.y))
 		){
 			//走到最右侧
-			if(xIndex + 1 >= 10){
+			if(xIndex + 1 >= 20){
 				xIndex = -1;
 			}
 			else{
                 //判断往下能否走
-				if(MapData[xIndex][yIndex+1] && !this.hadWalk[xIndex+"_"+(yIndex+1)]){
-					
+				 if(MapData[xIndex][yIndex+1] && !this.hadWalk[xIndex+"_"+(yIndex+1)]){
 					this.dir = "down";
 					yIndex += 1;
 				}
-                //判断往右能否走
-				else if(MapData[xIndex+1][yIndex]  && !this.hadWalk[(xIndex+1)+"_"+yIndex]){
-					this.dir = "right";
-					xIndex += 1;
-				}
-				else if(MapData[xIndex][yIndex-1] && !this.hadWalk[xIndex+"_"+(yIndex-1)]){
+				 else if(MapData[xIndex-1][yIndex] && !this.hadWalk[(xIndex-1)+"_"+yIndex]){
+					 this.dir = "left";
+					 xIndex -= 1;
+				 }
+				 //判断往右能否走
+				 else if(MapData[xIndex+1][yIndex]  && !this.hadWalk[(xIndex+1)+"_"+yIndex]){
+					 this.dir = "right";
+					 xIndex += 1;
+				 }
+				 else if(MapData[xIndex][yIndex-1] && !this.hadWalk[xIndex+"_"+(yIndex-1)]){
 					this.dir = "up";
 					yIndex -= 1;
 				}
-				else if(MapData[xIndex-1][yIndex] && !this.hadWalk[(xIndex-1)+"_"+yIndex]){
-					this.dir = "left";
-					xIndex -= 1;
-				}
+
+
+
 			}
 			//是否走到最右侧
 			if(xIndex == -1){
@@ -185,7 +186,7 @@ function updateEnemy(){
 		
 		enemy = Game.enemyList[i];
 		
-		if(!enemy)continue;
+		if(!enemy) continue;
 		
 		enemy.update();
 	}

@@ -53,6 +53,11 @@ var Main = {
             $("#rank").hide();
         })
     },
+    musicControl: function () {
+        var myVideo = document.getElementById("music");
+
+        myVideo.play();
+    },
     gameControl: function () {
         $("#game_buttons .button:eq(0)").click(function () {
             if($(this).children("span").text()== "暂停"){
@@ -75,7 +80,37 @@ var Main = {
             $(".menu").hide();
             $(this).hide();
             Game.resume();
-        })
+        });
+        $("#game_speedup").click(function () {
+            if(Game.interval == 15){
+                Game.interval = 10;
+                $(this).attr("disabled",true);
+                $(".game_speedtext b").text("3");
+            }
+            else if(Game.interval == 20){
+                Game.interval = 15;
+                $(".game_speedtext b").text("2");
+                $(this).prev().attr("disabled",false);
+            }
+            $(this).children("span").text("暂停");
+            Game.resume();
+            console.log(Game.interval);
+            });
+        $("#game_speeddown").click(function () {
+            if(Game.interval == 10){
+                Game.interval = 15;
+                $(".game_speedtext b").text("2");
+                $(this).next().attr("disabled",false);
+            }
+            else if(Game.interval == 15){
+                Game.interval = 20;
+                $(".game_speedtext b").text("1");
+                $(this).attr("disabled",true);
+            }
+            $(this).children("span").text("暂停");
+            Game.resume();
+            console.log(Game.interval);
+        });
     }
 
 }

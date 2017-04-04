@@ -6,25 +6,29 @@ var Info = {
 	mission : 1,
     //塔的图片对象
 	towerImg : null,
+	towerBg: $("#tower_bg")[0],
+	background:null,
+	gold:$("#gold_bg")[0],
     //每种塔在右侧的位置信息
 	towerPosition : [],
     //已经安装的塔的位置信息
 	installTower : {},
+	nameList:["盗贼","守卫","猎人","预言家","巫师"],
 	init : function(cxt,img,bg){
 		this.towerImg = img;
 		this.background = bg;
         //画塔
+		Canvas.clear(cxt,1000,600);
+		Canvas.drawImg(cxt,this.towerBg,0,0,1000,60,0,550,1000,55);
 		for(var i = 0;i<5;i++){
-			Canvas.drawImg(cxt,img,i*50,0,50,50,50+i*150,550,50,50);
-			
-			this.towerPosition.push({x:50+i*150,y:550,width:50,height:50});
+			Canvas.drawImg(cxt,img,i*50,0,50,50,20+i*140,550,50,45);
+			Canvas.drawImg(cxt,this.gold,0,0,50,50,75+i*140,575,20,20)
+			Canvas.drawText(cxt,this.nameList[i],75+i*140,570,'black',"18px");
+			Canvas.drawText(cxt,(i+1)*25,98+i*140,592,'black',"16px");
+			this.towerPosition.push({x:20+i*140,y:550,width:150,height:50});
 		}
 		//画塔下的描述信息
-		//Canvas.drawText(cxt,"50(↑50)",160,25,'orange');
-		//Canvas.drawText(cxt,"75(↑75)",230,230,'orange');
-		//Canvas.drawText(cxt,"100(↑100)",300,25,'orange');
-		//Canvas.drawText(cxt,"125(↑125)",370,25,'orange');
-		//Canvas.drawText(cxt,"150(↑150)",440,25,'orange');
+
 		this.redraw();
 		this.bindEvent();
 	},
@@ -134,13 +138,12 @@ var Info = {
 	},
     //重画
 	redraw : function(){
-		console.log(123);
 		Canvas.clear(Game.canvasList.info,400,60);
 		Canvas.drawImg(Game.canvasList.info,this.background,0,0,340,40,0,3,340,40);
-		Canvas.drawText(Game.canvasList.info,this.money,80,30,"black");
-		//Canvas.drawText(Game.canvasList.info,"第"+this.mission+"波",120,30,"black");
-		Canvas.drawText(Game.canvasList.info,this.life,270,30,"black");
-		Canvas.drawText(Game.canvasList.info,this.score,180,30,"black");
+		Canvas.drawText(Game.canvasList.info,this.money,80,30,"black","20px");
+		Canvas.drawText(Game.canvasList.info,"第"+this.mission+"波",500,30,"black");
+		Canvas.drawText(Game.canvasList.info,this.life,270,30,"black","20px");
+		Canvas.drawText(Game.canvasList.info,this.score,180,30,"black","20px");
 	},
     //画出塔的攻击范围以及升级等信息
 	drawScope : function(tower){

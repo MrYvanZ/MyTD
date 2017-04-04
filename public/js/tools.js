@@ -14,11 +14,11 @@
 		 else cxt.drawImage(img,x,y,sw,sh,dx,dy,dw,dh);
     },
      //画文字
-    drawText : function(cxt,string,x,y,color){
+    drawText : function(cxt,string,x,y,color,size){
 
 		cxt.fillStyle = color;
-         cxt.font = '20px zh_font';
-         cxt.fillText(string,x,y);
+		cxt.font = size+' zh_font';
+		cxt.fillText(string,x,y);
     },
     //画填充的方
 	fillRect : function(cxt,x,y,width,height,color){

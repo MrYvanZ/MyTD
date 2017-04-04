@@ -29,7 +29,7 @@ body {
     width: 100%;
     height: 600px;
     background: url("../img/menu-bg.jpg") no-repeat;
-    background-size:100% ;
+    background-size:100% 600px;
 }
 .button{
     text-align: center;
@@ -177,6 +177,12 @@ body {
     padding: 4%;
     font-size: 20px;
     line-height: 25px;
+}
+.introduction p{
+    font-weight:900;
+}
+.help p span{
+    color: red;
 }
 .introduction,.enemy,.person{
     width: 100%;
@@ -461,4 +467,23 @@ input:-ms-input-placeholder{
     font-size: 20px;
     line-height: 30px;
     height: 30px;
+}
+#game_next{
+    position: absolute;
+    top: 565px;
+    left: 810px;
+    line-height: 20px;
+    z-index: 999;
+}
+.game_speedtext{
+    margin-left: 15px;
+    font-size: 18px;
+}
+#game_speedup,#game_speeddown{
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 12px;
+    line-height: 10px;
+    font-weight: bold;
+    cursor: pointer;
 }

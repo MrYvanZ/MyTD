@@ -16,7 +16,9 @@
 	<img src="img/map-gezi1.jpg" id="map-gezi1" style="display: none">
 	<img src="img/bg.jpg" id="map-gezi2" style="display: none">
 	<img src="img/info-bg.png" id="info_bg" style="display: none">
-
+	<img src="img/tower-background.png" id="tower_bg" style="display: none">
+	<img src="img/gold.png" id="gold_bg" style="display: none">
+	<audio src="music/mybgm.mp3"></audio>
 	<div class="main-box">
 		<div class="menu"  >
 			<div class="button-box"  >
@@ -36,19 +38,19 @@
 			<div id="rank"hidden>
 				<ul id="map_list">
 					<li id="map1" class="choose">
-						<img src="img/map_bg1.png" height="110" width="230" class="map_img1">
+						<img src="img/map_1.png" height="110" width="230" class="map_img1">
 						<img src="img/map_bgshodow1.png" height="115" width="240" class="map_img2">
 					</li>
 					<li id="map2" >
-						<img src="img/map_bg1.png" height="110" width="230" class="map_img1">
+						<img src="img/map_2.png" height="110" width="230" class="map_img1">
 						<img src="img/map_bgshodow1.png" height="115" width="240" class="map_img2">
 					</li>
 					<li id="map3" >
-						<img src="img/map_bg1.png" height="110" width="230" class="map_img1">
+						<img src="img/map_3.png" height="110" width="230" class="map_img1">
 						<img src="img/map_bgshodow1.png" height="115" width="240" class="map_img2">
 					</li>
 					<li id="map4">
-						<img src="img/map_bg1.png" height="110" width="230" class="map_img1">
+						<img src="img/map_4.png" height="110" width="230" class="map_img1">
 						<img src="img/map_bgshodow1.png" height="115" width="240" class="map_img2">
 					</li>
 				</ul>
@@ -70,13 +72,11 @@
 				<div class="help-left">
 					<div class="introduction">
 						<h2>游戏简介</h2>
-						<p>说明：每种塔都可以升级到3级，升级的价格与本身建造相同，卖掉的话就是总额的一半。
-							说明：每种塔都可以升级到3级，升级的价格与本身建造相同，卖掉的话就是总额的一半。
-							说明：每种塔都可以升级到3级，升级的价格与本身建造相同，卖掉的话就是总额的一半。
-							说明：每种塔都可以升级到3级，升级的价格与本身建造相同，卖掉的话就是总额的一半。
-							说明：每种塔都可以升级到3级，升级的价格与本身建造相同，卖掉的话就是总额的一半。
-							说明：每种塔都可以升级到3级，升级的价格与本身建造相同，卖掉的话就是总额的一半。
-							说明：每种塔都可以升级到3级，升级的价格与本身建造相同，卖掉的话就是总额的一半。</p>
+						<p>&nbsp;欢迎来到“狼人护卫队”塔防，在游戏中，你将扮演“领导者”的角色来指挥勇士们抵御敌人的进攻。以下是游戏中的三种基本元素：<br/>
+							&nbsp;<span>金币：</span>在初始时你拥有100单位的金币，建造和升级角色需要消耗金币。杀死怪物会获得一定的金币。<br/>
+							&nbsp;<span>生命值：</span>初始你拥有10单位的生命值，当一个怪物成功突破你的防线时，生命值将减一。生命值归零时游戏结束。<br/>
+							&nbsp;<span>积分：</span>每当你击败一个怪物，你将得到相应的积分，最终的积分由你击杀所得到的积分和你剩余金币的总和决定。游戏结束时，你可以选择将积分上传至服务器。
+						</p>
 					</div>
 					<div class="enemy">
 						<h2>敌方单位</h2>
@@ -89,18 +89,14 @@
 					<div class="person">
 						<h2>游戏角色</h2>
 						<p>
-							说明：每种塔都可以升级到3级，升级的价格与本身建造相同，卖掉的话就是总额的一半。<br/><br/>
-							第一种塔：升级到3级，有小偷功能，每攻击一次会偷取1块钱。<br/>
-							第二种塔：减速攻击，3级时可以同时减速两个。<br/>
-							第三种塔：多重攻击。攻击多个目标。<br/>
-							第四种塔：穿刺攻击，攻击一条线上，攻击力最高。<br/>
-							第五种塔：秒杀攻击，有一定几率把敌人秒杀。<br/><br />
+							&nbsp;每个角色都拥有自己不同的技能，而且可以提升到3级，每次升级之后攻击范围和攻击速度都会获得提高。<br/>
+							&nbsp;<span>盗贼</span>：三级时获得“偷窃”能力，每次攻击偷取一金币。<br/>
+							&nbsp;<span>守卫</span>：拥有“减速”能力，三级时可以同时减速两个目标。<br/>
+							&nbsp;<span>猎人</span>：拥有“多重攻击”能力，可以攻击多个目标。<br/>
+							&nbsp;<span>预言家</span>：拥有“透射”能力，攻击能穿透目标单位。<br/>
+							&nbsp;<span>巫师</span>：拥有“毒药”能力，攻击时有一定几率毒死目标。
 						</p>
-						<img src="img/daozei.png" width="70" height="70" style="font-size:0">
-						<img src="img/daozei.png" width="70" height="70" style="font-size:0">
-						<img src="img/daozei.png" width="70" height="70" style="font-size:0">
-						<img src="img/daozei.png" width="70" height="70" style="font-size:0">
-						<img src="img/daozei.png" width="70" height="70" style="font-size:0">
+						<img src="img/help-person.png" width="400" height="110" style="font-size:0">
 						<div class="button" id="help-back">
 							<span>返回菜单</span>
 						</div>
@@ -112,23 +108,23 @@
 			<h1>选择地图</h1>
 			<ul id="select_map">
 				<li name="1">
-					<h2>岩石村庄</h2>
+					<h2>关卡模式I</h2>
 					<img src="img/map_1.png" height="160" width="340" class="map_img1">
 					<img src="img/map_bgshodow1.png" height="165" width="355" class="map_img2">
 				</li>
 				<li name="2"  class="choose">
-					<h2>岩石村庄</h2>
-					<img src="img/map_bg1.png" height="160" width="340" class="map_img1">
+					<h2>关卡模式II</h2>
+					<img src="img/map_2.png" height="160" width="340" class="map_img1">
 					<img src="img/map_bgshodow1.png" height="165" width="355" class="map_img2">
 				</li>
 				<li name="3">
-					<h2>岩石村庄</h2>
-					<img src="img/map_bg1.png" height="160" width="340" class="map_img1">
+					<h2>循环模式</h2>
+					<img src="img/map_3.png" height="160" width="340" class="map_img1">
 					<img src="img/map_bgshodow1.png" height="165" width="355" class="map_img2">
 				</li>
 				<li name="4">
-					<h2>岩石村庄</h2>
-					<img src="img/map_bg1.png" height="160" width="340" class="map_img1">
+					<h2>随机地图模式</h2>
+					<img src="img/map_4.png" height="160" width="340" class="map_img1">
 					<img src="img/map_bgshodow1.png" height="165" width="355" class="map_img2">
 				</li>
 			</ul>
@@ -147,6 +143,11 @@
 				<div class="button">
 					<span>退出</span>
 				</div>
+			</div>
+			<div id="game_next">
+				<span class="game_speedtext"><b>1</b>倍速</span>
+				<div id="game_speeddown"><<</div>
+				<div id="game_speedup">>></div>
 			</div>
 			<canvas id="info" width="1000" height="600" ></canvas>
 			<canvas id="map" width="1000" height="500" ></canvas>
@@ -173,8 +174,6 @@
 			<div id="upload_result" hidden>
 			</div>
         </div>
-	</div>
-
 </body>
 <script type="text/javascript" src="js/tools.js"></script>
 <script type="text/javascript" src="js/MapData.js"></script>

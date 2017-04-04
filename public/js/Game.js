@@ -12,6 +12,8 @@ var Game = {
 	bulletList : [],
     //关卡数
 	mission : 0,
+	//游戏刷新速度,
+	interval:20,
     //每关已出的敌人数
 	missionEnemy : 0,
     //每关的休息时间
@@ -27,6 +29,7 @@ var Game = {
     //当前选中的塔
 	nowSelectTower : null,
     //初始化
+	img: $("#map-gezi1")[0],
 	init : function(){
 		this.initImg();
 		var inited =  this.initImg();
@@ -149,6 +152,7 @@ var Game = {
 	},
     //开始
 	start : function(){
+		this.initData();
 		var name = $("#select_map .choose").attr('name');
         switch(name){
             case "1":
@@ -158,19 +162,19 @@ var Game = {
                 MapData = MapTwo;
                 break;
 			case "3":
-				MapDtaa =  MapOne;
+				MapData=MapThree;
 				break;
 			case "4":
-				MapDtaa =  MapOne;
+				MapData =  MapFour;
 				break;
 			default:
                 MapData = MapOne;
                 break;
         }
-        Map.draw(this.canvasList.map);
+        Map.draw(this.canvasList.map,this.img);
 		$(".maps").hide();
 		$("#game").show();
-		Info.redraw();
+		$(".game_speedtext b").text(1);
 		this.timer = setInterval(Game.loop,20);
 	},
     //重新开始
@@ -208,7 +212,8 @@ var Game = {
 	},
 	//继续
 	resume: function () {
-		this.timer = setInterval(Game.loop,20);
+		clearInterval(this.timer);
+		this.timer = setInterval(Game.loop,this.interval);
 
 	},
     //结束
@@ -216,12 +221,17 @@ var Game = {
 		this.stop();
 		$("#game").hide();
 		$("#last_score").text(Info.score);
-		$("#fail").show();
+		$("#fail").css("background-image","url('../img/fail_bg.jpg')").show();
+		$("#fail h1").text(游戏失败);
 	},
     //赢了
 	win : function(){
 		this.stop();
-		alert("你赢了!");
+		$("#game").hide();
+		$("#last_score").text(Info.score);
+		$("#fail").css("background-image","url('../img/win_bg.jpg')").show();
+		$("#fail h1").text(游戏胜利);
+
 	},
     //循环体
 	loop : function(){
