@@ -138,10 +138,10 @@ var Info = {
 	},
     //重画
 	redraw : function(){
-		Canvas.clear(Game.canvasList.info,400,60);
-		Canvas.drawImg(Game.canvasList.info,this.background,0,0,340,40,0,3,340,40);
+		Canvas.clear(Game.canvasList.info,600,60);
+		Canvas.drawImg(Game.canvasList.info,this.background,0,0,600,40,0,3,600,40);
 		Canvas.drawText(Game.canvasList.info,this.money,80,30,"black","20px");
-		Canvas.drawText(Game.canvasList.info,"第"+this.mission+"波",500,30,"black");
+		Canvas.drawText(Game.canvasList.info,"第"+this.mission+"波",510,30,"black");
 		Canvas.drawText(Game.canvasList.info,this.life,270,30,"black","20px");
 		Canvas.drawText(Game.canvasList.info,this.score,180,30,"black","20px");
 	},

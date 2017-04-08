@@ -165,7 +165,7 @@ var Game = {
 				MapData=MapThree;
 				break;
 			case "4":
-				MapData =  MapFour;
+				MapData =  Map.randomMap(20,10);
 				break;
 			default:
                 MapData = MapOne;
@@ -220,17 +220,18 @@ var Game = {
 	over : function(){
 		this.stop();
 		$("#game").hide();
+		$("#fail h1").text("游戏失败");
 		$("#last_score").text(Info.score);
 		$("#fail").css("background-image","url('../img/fail_bg.jpg')").show();
-		$("#fail h1").text(游戏失败);
 	},
     //赢了
 	win : function(){
 		this.stop();
 		$("#game").hide();
+		$("#fail h1").text("游戏胜利");
 		$("#last_score").text(Info.score);
 		$("#fail").css("background-image","url('../img/win_bg.jpg')").show();
-		$("#fail h1").text(游戏胜利);
+
 
 	},
     //循环体

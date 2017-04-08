@@ -1,20 +1,26 @@
 //页面操作类
 var Main = {
     isStart:false,
+    isMusic:true,
+    music:$("audio")[0],
     init:function(){
         this.chooseMap();
         this.common();
         this.gameControl();
         this.startGame();
+        this.musicControl();
     },
 
     startGame:function (){
+        var _this = this;
         $("#start_game").click(function () {
-            if(!this.isStart)
+            if(!_this.isStart)
                 Game.start();
             else
                 Game.restart();
-            this.isStart = true;
+            _this.isStart = true;
+            if(_this.isMusic)
+                _this.music.play();
         })
     },
     chooseMap: function () {
@@ -54,9 +60,19 @@ var Main = {
         })
     },
     musicControl: function () {
-        var myVideo = document.getElementById("music");
+        var _this = this;
+       $("#music").click(function () {
+           if(_this.music.paused){
+               $(this).css("background-position","-40px 0");
+               _this.music.play();
+           }
+           else{
+               $(this).css("background-position","0 0");
+               _this.music.pause();
+           }
+           _this.isMusic=false;
+       });
 
-        myVideo.play();
     },
     gameControl: function () {
         $("#game_buttons .button:eq(0)").click(function () {

@@ -9,18 +9,16 @@ var Map = {
 			for(j = 0;j<20;j++){
 				//画背景地图
 				if(MapData[i][j] == 0){
-				//	Canvas.drawRect(map,i*50,j*50,50,50,'red');
-						if((j%2 == 0 && i%2 !=0)||(j%2!=0&&i%2==0))
-							map.drawImage(img,0,0,60,60,i*50,j*50,50,50);
-						else
-							map.drawImage(img,60,0,60,60,i*50,j*50,50,50);
+					if((j%2 == 0 && i%2 !=0)||(j%2!=0&&i%2==0))
+						map.drawImage(img,0,0,60,60,i*50,j*50,50,50);
+					else
+						map.drawImage(img,60,0,60,60,i*50,j*50,50,50);
 
 				}
                 //画可以走的路
 				else{
 					var img2 = $("#map-gezi2")[0];
 					map.drawImage(img2,0,0,60,60,i*50,j*50,50,50);
-					//Canvas.fillRect(map,i*50,j*50,50,50,'black');
 				}
 			}
 		}
@@ -39,62 +37,105 @@ var Map = {
 						a[i][j] = 0;
 					}
 				}
-				//中间格子为1
-				for(var i=1;i<r-1;i++)
-					for(var j=1;j<c-1;j++)
-					{
-						a[i][j] = 1;
-					}
 				return a;
 			}
 			//处理数组，产生最终的数组
 			function process(arr)
 			{
-				//acc存放已访问队列，noacc存放没有访问队列
-				var acc = [],noacc = [];
-				var r = arr.length,c=arr[0].length;
-				var count = r*c;
-				for(var i=0;i<count;i++){noacc[i] = 0;}
-				//定义空单元上下左右偏移
-				var offs=[-c,c,-1,1],offR=[-1,1,0,0],offC=[0,0,-1,1];
-				//随机从noacc取出一个位置
-				var pos = Math.round(Math.random()*count);
-				noacc[pos] = 1;
-				acc.push(pos);
-				while(acc.length < count)
-				{
-					var ls = -1,offPos = -1;
-					offPos = -1;
-					//找出pos位置在二维数组中的坐标
-					var pr = pos/c|0,pc=pos%c,co=0,o=0;
-					//随机取上下左右四个单元
-					while(++co<5)
-					{
-						o = Math.round(Math.random()*5);
-						ls =offs[o]+pos;
-						var tpr = pr+offR[o];
-						var tpc = pc+offC[o];
-						if(tpr>=0&&tpc>=0&&tpr<=r-1&&tpc<=c-1&&noacc[ls]==0){ offPos = o;break;}
+				var maxX= c-2;
+				var maxY = r-1;
+				var nowY,nowX,reX,reY,X, Y,newArr=[];
+				newArr.push([0,1]);
+				nowX = Math.ceil(Math.random()*maxX);
+				X = nowX;
+				reX = nowX;
+				nowY = Math.ceil(Math.random()*maxY/2);
+				Y = nowY+1;
+				reY = nowY;
+				newArr.push([X,Y]);
+				while(Y!=maxY){
+					if(reY < 0 && reX > 0){
+						nowX = Math.ceil(Math.random()*(maxX-X-1)+1);
 					}
-					if(offPos<0)
-					{
+					else if(reY < 0 && reX <= 0){
+						nowX = Math.ceil(Math.random()*(X-2)+1);
+					}
+					else if(reY > 0){
+						var m = (maxX-X)-(X-1);
+						if(m >= 0)
+							nowX = Math.ceil(Math.random()*(maxX-X-1)+1);
+						else
+							nowX = Math.ceil(Math.random()*(X-2)+1)*(-1);
+						//if(reY < 2)
+						//	nowY = Math.ceil(Math.random()*(maxY/2-1))+1;
+						//else if(reX >0&&(maxX-X)<3)
+						//	nowY = Math.ceil(Math.random()*(maxY/2-1))+1;
+						//else if(reX<0&&(X-1)<3)
+						//	nowY = Math.ceil(Math.random()*(maxY/2-1))+1;
+						//else
+						//	nowY = Math.ceil(Math.random()*reY-1)*(-1);
+					}
+					reX = nowX;
+					X = X +nowX;
+					if(reY < 0)
+						nowY = Math.ceil(Math.random()*(maxY/2-1))+1;
+					else{
+						if(reY < 2)
+							nowY = Math.ceil(Math.random()*(maxY/2-1))+1;
+						else if(reX >0&&(maxX-X)<3)
+							nowY = Math.ceil(Math.random()*(maxY/2-1))+1;
+						else if(reX<0&&(X-1)<3)
+							nowY = Math.ceil(Math.random()*(maxY/2-1))+1;
+						else
+							nowY = Math.ceil(Math.random()*reY-1)*(-1);
+					}
 
-						pos = acc[Math.round(Math.random()*acc.length)];
+
+					reY = nowY;
+					Y = Y +nowY;
+					if(Y>=maxY){
+						Y=maxY;
 					}
-					else
-					{
-						pr = 2*pr+1;
-						pc = 2*pc+1;
-						//相邻空单元中间的位置置0
-						arr[pr+offR[offPos]][pc+offC[offPos]]=0;
-						pos = ls;
-						noacc[pos] = 1;
-						acc.push(pos);
+					newArr.push([X,Y]);
+				}
+				console.log(newArr);
+				setroad(arr,newArr);
+				//for(var i= 0;i<newArr.length;i++){
+				//	arr[newArr[i][1]][newArr[i][0]] = 1;
+				//	for(var x = 0;x<newArr[i][0]+1;x++)
+				//		arr[newArr[i][1]][x]=1;
+				//}
+			}
+			//在数组中画出计算出来的路径
+			function setroad(arr,newArr){
+				for(var i=1;i<newArr.length;i++){
+					var X = newArr[i][0],Y = newArr[i][1],rX = newArr[i-1][0]||0,rY = newArr[i-1][1]||0;
+					if(X >= rX ){
+						for(var x=rX;x<=X;x++){
+							arr[rY][x]=1;
+						}
+					}
+					else{
+						for(var x=X;x<=rX;x++){
+							arr[rY][x]=1;
+						}
+					}
+					if(Y >= rY ){
+						for(var y=rY;y<=Y;y++){
+							arr[y][X]=1;
+						}
+					}
+					else{
+						for(var y=Y;y<=rY;y++){
+							arr[y][X]=1;
+						}
 					}
 				}
+
 			}
 			var a = init(r,c);
 			process(a);
+			console.log(a);
 			return a;
 		}
 }

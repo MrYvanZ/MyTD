@@ -460,7 +460,7 @@ input:-ms-input-placeholder{
     float: left;
     width: 130px;
     height: 30px;
-    margin: 0 10px;
+    margin: 0;
     padding: 3px 10px;
 }
 #game_buttons .button span{
@@ -485,5 +485,15 @@ input:-ms-input-placeholder{
     font-size: 12px;
     line-height: 10px;
     font-weight: bold;
+    cursor: pointer;
+}
+#music{
+    width: 40px;
+    height: 40px;
+    float: left;
+    margin-left: 10px;
+    background:url("../img/music.png") no-repeat;
+    background-position: -40px 0px;
+    background-size:80px 40px ;
     cursor: pointer;
 }
