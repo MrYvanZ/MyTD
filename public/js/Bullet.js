@@ -24,11 +24,11 @@ function Bullet(cxt,img,type,enemy,level,x,y,radius){
 }
 Bullet.prototype = {
 	//子弹在图像中的对应
-	bulletMap : [{x:0,y:0},{x:10,y:0},{x:20,y:0},{x:30,y:0},{x:40,y:0}],
+	bulletMap : [{x:0,y:0},{x:40,y:0},{x:80,y:0},{x:120,y:0},{x:160,y:0}],
     //画子弹
 	draw : function(){
-		
-		Canvas.drawImg(this.cxt,this.img,this.bulletMap[this.type].x,this.bulletMap[this.type].y,this.radiusAll,this.radiusAll,this.x,this.y,this.radiusAll,this.radiusAll);
+
+		Canvas.drawImg(this.cxt,this.img,this.bulletMap[this.type].x,this.bulletMap[this.type].y,this.radiusAll*4,this.radiusAll*4,this.x,this.y,this.radiusAll,this.radiusAll);
 	},
     //更新子弹信息
 	update : function(enemyList){

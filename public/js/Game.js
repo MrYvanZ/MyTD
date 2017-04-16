@@ -81,12 +81,10 @@ var Game = {
 				if(T.pointInRect({x:x,y:y},Game.towerList[i])){
 					//画出范围
 					Info.drawScope(Game.towerList[i]);
-					
 					if(Game.nowSelectTower){
 						//升级或卖掉
 						Info.upgradeOrSell(x,y);
 					}
-					
 					Game.nowSelectTower = Game.towerList[i];
 					
 					break;
@@ -103,51 +101,34 @@ var Game = {
 	},
     //出敌人
 	initEnemy : function(){
-		
 		if(Game.missionLazy > 0){
-			
 			Game.missionLazy -= 20;
-			
 			return false;
 		}
-		
 		if(Game.enemyLazy > 0){
-			
 			Game.enemyLazy -= 20;
-			
 			return false;
 		}
 		else{
-			
 			Game.enemyLazy = Game.enemyTime;
 		}
-		
 		if(Game.missionEnemy > 20){
-			
 			Game.missionEnemy = 1;
-			
 			Game.mission += 1;
 			Info.updateMission();
-			
 			Game.missionLazy = Game.missionTime;
-			
 			if(Game.mission >= 20){
-				
 				Game.initEnemy = function(){
-					
-					if(Game.enemyList.length <= 0)Game.win();
+					if(Game.enemyList.length <= 0) Game.win();
 				};
 				return false;
 			}
-			
 			return false;
 		}
-		
 		Game.missionEnemy += 1;
 		//新增一个敌人
 		var enemy = new Enemy(Game.canvasList.main,Game.imgList.enemy_img,Game.mission,55,0,40,40);
 		enemy.num = Game.mission*20+Game.missionEnemy;
-		
 		Game.enemyList.push(enemy);
 	},
     //开始

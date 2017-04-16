@@ -34,14 +34,13 @@ var Info = {
 	},
     //绑定右侧塔的事件
 	bindEvent : function(){
-		
+
 		var self = this,info = $("#info")[0],
 			select = $("#select")[0],
 			main = Game.canvasList.tower,
 			cxt = Game.canvasList.select;
 		//鼠标按下
 		info.onmousedown = function(e){
-
 			var x = e.offsetX || e.layerX,
 				y = e.offsetY || e.layerY,
 				xIndex,yIndex;
@@ -51,27 +50,28 @@ var Info = {
 				if(T.pointInRect({x:x,y:y},self.towerPosition[i])){
                     //金钱不够,退出
 					if(self.money - TowerType[i]["level_1"].buyIt < 0)break;
-					//绑定移动移动事件,也可以说是拖动
+					//绑定拖动事件
 					select.onmousemove = function(e){
 
 						x = e.offsetX || e.layerX;
 						y = e.offsetY || e.layerY;
-						
+
 						xIndex = Math.floor(x / 50);
 						yIndex = Math.floor(y / 50);
-						
+
 						Canvas.clear(cxt,1000,500);
                         //画出塔在左侧区域
 						Canvas.drawImg(cxt,self.towerImg,i*50,0,50,50,x-25,y-25,50,50);
 						//画出范围,如果当前位置没有塔而且是可放塔的
-						if(MapData[xIndex][yIndex] == 0 && !self.installTower[xIndex+"_"+yIndex])Canvas.fillArc(cxt,x,y,TowerType[i]["level_1"].scope,"rgba(25,174,70,0.5)");
+						if(MapData[xIndex][yIndex] == 0 && !self.installTower[xIndex+"_"+yIndex])Canvas.
+						fillArc(cxt,x,y,TowerType[i]["level_1"].scope,"rgba(25,174,70,0.5)");
 						else Canvas.fillArc(cxt,x,y,TowerType[i]["level_1"].scope,"rgba(252,82,7,0.5)");
 						//画出塔具体的放置位置
 						Canvas.drawRect(cxt,xIndex*50,yIndex*50,50,50,'black');
 					}
                     //绑定鼠标释放事件,就是拖动结束
 					select.onmouseup = function(e){
-						
+
 						Canvas.clear(cxt,1000,500);
 						//此位置可以放塔
 						if(MapData[xIndex][yIndex] == 0 && !self.installTower[xIndex+"_"+yIndex]){
@@ -90,17 +90,15 @@ var Info = {
 						this.onmousemove = null;
 						this.onmouseup = null;
 					}
-					
 					break;
 				}
 			}
-
 		}
 		//如果鼠标释放的位置还在左侧,则取消此次操作
 		info.onmouseup = function(){
-			
+
 			Canvas.clear(cxt,1000,500);
-			
+
 			select.onmousemove = null;
 			select.onmousedown = null;
 		}
@@ -108,16 +106,16 @@ var Info = {
     //更新金钱
 	updateMoney : function(money){
 		this.money += money;
-		
+
 		this.redraw();
 	},
     //更新剩余生命
 	updateLife : function(){
-		
+
 		this.life -= 1;
-		
+
 		this.redraw();
-		
+
 		if(this.life <= 0){
 			Game.over();
 		}
@@ -130,11 +128,11 @@ var Info = {
 	},
     //更新波数
 	updateMission : function(){
-		
+
 		this.mission += 1;
-		
+
 		this.redraw();
-		
+
 	},
     //重画
 	redraw : function(){
@@ -147,28 +145,25 @@ var Info = {
 	},
     //画出塔的攻击范围以及升级等信息
 	drawScope : function(tower){
-		
+
 		var select = Game.canvasList.select;
-		
+
 		Canvas.clear(select,1000,500);
-		
+
 		Canvas.fillArc(select,tower.x+25,tower.y+25,TowerType[tower.type]["level_"+tower.level].scope,"rgba(25,174,70,0.5)");
-		
+
 		if(tower.level < 3)Canvas.drawImg(select,Game.imgList.btn_img,0,0,20,20,tower.x,tower.y,20,20);
-		
+
 		Canvas.drawImg(select,Game.imgList.btn_img,20,0,20,20,tower.x+30,tower.y+30,20,20);
 	},
     //升级或卖掉
 	upgradeOrSell : function(x,y){
-		
+
 		var tower = Game.nowSelectTower;
 		//升级
 		if(tower.level < 3 && T.pointInRect({x:x,y:y},{x:tower.x,y:tower.y,width:20,height:20})){
-			
 			if(this.money - TowerType[tower.type]["level_"+(tower.level+1)].buyIt < 0)return false;
-			
 			tower.level += 1;
-			
 			this.updateMoney(TowerType[tower.type]["level_"+tower.level].buyIt * -1);
 			tower.draw((tower.level-1)*50);
 			this.drawScope(tower);
@@ -176,21 +171,13 @@ var Info = {
 		}
         //卖掉
 		else if(T.pointInRect({x:x,y:y},{x:tower.x+30,y:tower.y+30,width:20,height:20})){
-			
 			var money = Math.floor((tower.level * TowerType[tower.type]["level_1"].buyIt)/2);
-			
 			this.updateMoney(money);
-			
 			delete this.installTower[Math.floor(tower.x/50)+"_"+Math.floor(tower.y/50)];
-			
 			Game.towerList.remove(tower);
-			
 			Canvas.clearRect(Game.canvasList.tower,tower.x,tower.y,tower.width,tower.height);
-			
 			Canvas.clear(Game.canvasList.select,1000,500);
-			
 			tower = null;
-			//sell
 		}
 	}
 }

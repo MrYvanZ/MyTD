@@ -106,7 +106,8 @@ Enemy.prototype = {
 			yIndex = parseInt(this.y / 50,10);
 		//判断是否有下个移动位置信息,或者下哥移动位置信息是否已经走到了
 		if(!this.nextPosition || 
-			((this.x >= this.nextPosition.x - 5 && this.x <= this.nextPosition.x) && (this.y >= this.nextPosition.y - 5 && this.y <= this.nextPosition.y))
+			((this.x >= this.nextPosition.x - 5 && this.x <= this.nextPosition.x) &&
+			(this.y >= this.nextPosition.y - 5 && this.y <= this.nextPosition.y))
 		){
 			//走到最右侧
 			if(xIndex + 1 >= 20){
@@ -131,9 +132,6 @@ Enemy.prototype = {
 					this.dir = "up";
 					yIndex -= 1;
 				}
-
-
-
 			}
 			//是否走到最右侧
 			if(xIndex == -1){
@@ -145,7 +143,6 @@ Enemy.prototype = {
                 //记录已经走过的位置
 				this.hadWalk[xIndex+"_"+yIndex] = true;
 			}
-			
 		}
 		//有冰冻效果,时间减少
 		if(this.frozenTime > 0){

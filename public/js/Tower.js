@@ -29,7 +29,6 @@ Tower.prototype = {
 			this.cd -= 1;
 			return false;
 		}
-		
 		var towerInfo = TowerType[this.type]["level_"+this.level],
 			canShot = towerInfo.bullet,
 			enemy;
@@ -46,7 +45,8 @@ Tower.prototype = {
 				//可发送的子弹数减少
 				canShot -= 1;
 				//新增一个子弹,加入到子弹列表中
-				Game.bulletList.push(new Bullet(Game.canvasList.main,Game.imgList.bullet_img,this.type,enemy,this.level,this.x+20,this.y+20,5,5));
+				Game.bulletList.push(new Bullet(Game.canvasList.main,Game.imgList.bullet_img,
+					this.type,enemy,this.level,this.x+20,this.y+20,5,5));
 				//如果可用子弹没了,退出
 				if(canShot <= 0)break;
 			}
